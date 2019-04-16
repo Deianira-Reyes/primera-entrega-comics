@@ -102,7 +102,7 @@ Este documento se compuso con harto copy/paste
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
         // Lo primero es obtener un JSON y parsearlo en una variable de nombre data
-        $.getJSON("https://api.myjson.com/bins/bqrcg", function(data) {
+        $.getJSON("https://api.myjson.com/bins/1coa5k", function(data) {
             // Si imprimes data en consola logras dos cosas
             // Lo primero es comprobar el parseo de JSON requerido
             // Lo segundo es conocer la estructura del JSON parseado
@@ -115,8 +115,12 @@ Este documento se compuso con harto copy/paste
             }).addTo(mymap);
             // Después puedes explorar el arreglo en la variable de nombre data con un ciclo for
             for (var x = 0; x < data.length; x++) {
+                var Icon = L.icon({
+                iconUrl: 'comic_icon.png',
+                iconSize: [30, 30], // size of the icon
+                });
                 // con esto se agregan puntos en el plano por cada dato
-                L.marker([data[x].ubicacion[0], data[x].ubicacion[1]]).addTo(mymap).bindPopup(data[x].nombre).closePopup();
+                L.marker([data[x].ubicacion[0], data[x].ubicacion[1]], {icon: Icon}).addTo(mymap).bindPopup(data[x].nombre).closePopup();
                 // aprovechando el ciclo for, podemos crear otros elementos, fuera del mapa
                 // revisen el primer ejemplo en https://getbootstrap.com/docs/4.0/components/card/
                 var primero =   "<div class=\"col-sm-4 col-lg-3 my-3\">";
@@ -124,14 +128,17 @@ Este documento se compuso con harto copy/paste
                         var tercero =   "<img src=\"" + data[x].foto + "\" class=\"card-img-top\">";
                         var cuarto  =   "<div class=\"card-body\ btn-dark\">";
                             var quinto  =   "<h5 class=\"card-title\">" + data[x].nombre + "</h5>"
-                            var sexto   =   "<p class=\"card-text\">" + data[x].tel + " Teléfono</p>";
-                            var septimo =   "<a href=\"" + data[x].url + "\" target=\"_dark\" class=\"btn btn-info btn-sm\">Página de contacto</a>";
-                        var octavo  =   "</div>";                
-                    var noveno  =   "</div>";
-                var decimo  =   "</div>";
+                            var sexto   =   "<p class=\"card-text\">" + data[x].direccion + "</p>";
+                            var septimo =  "<p class=\"card-text\">" + data[x].tel + " Teléfono</p>";
+                        var octavo  =    "<p class=\"card-text\">" + data[x].horario + "</p>";                
+                    var noveno  =   "<p class=\"card-text\">" + data[x].email + "</p>";
+                var decimo  =   "<a href=\"" + data[x].url + "\" target=\"_dark\" class=\"btn btn-info btn-sm\">Página de contacto</a>";
                 // esto se agrega tantas veces como puntos en el mapa, porque estamos dentro del mismo ciclo for
                 $("#tiendas").append(primero + segundo + tercero + cuarto + quinto + sexto + septimo + octavo + noveno + decimo);
             }
+            
+            
+            
         });
         //Agrego lo siguiente para que al clic del menú la página suba y baje en 1 segundo, suavecito
         $('a[href*="#"]:not([href="#"])').click(function() {
@@ -146,6 +153,15 @@ Este documento se compuso con harto copy/paste
               }
             }
         });
+        
+        $(document).scroll(function(){
+         if ($(this).scrollTop() > 650) {
+          $('nav').addClass("info");
+         } else {
+          $('nav').removeClass("info");
+         }
+      });
+
     </script>
     
 </body>

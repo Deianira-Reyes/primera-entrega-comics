@@ -3,12 +3,26 @@
 body{
     
   font-family: 'Mukta', sans-serif;
-  font-weight: 400;
+  font-weight: 100;
+}
+
+h5 {
+    
+  font-weight: bold;
 }
 
 nav{
   font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
+  font-weight: 200;
+}
+
+.navbar-dark {
+    background-color: transparent;
+    }
+
+.info {
+    background-color:#12b2b9;
+    color:white;
 }
 
 header {
